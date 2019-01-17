@@ -19,6 +19,7 @@ class ReitAppScrapyPipeline(object):
         db = connection[settings['MONGODB_DB']]
         self.collection = db[settings['MONGODB_COLLECTION']]
 
+    
     def process_item(self, item, spider):
         valid = True
         for data in item:
@@ -26,7 +27,22 @@ class ReitAppScrapyPipeline(object):
                 valid = False
                 raise DropItem("Missing {0}!".format(data))
         if valid:
-            self.collection.insert(dict(item))
-            log.msg("Question added to MongoDB database!",
-                    level=log.DEBUG, spider=spider)
+            if self.checkDuplicate(item):
+                self.collection.insert(dict(item))
+                log.msg("REIT added to MongoDB database!",
+                        level=log.DEBUG, spider=spider)
+            else:
+                log.msg("REIT duplicate in MongoDB database!",
+                        level=log.DEBUG, spider=spider)
         return item
+
+    def checkDuplicate(self, item):
+        # print "************** : " + item['name']
+        doc = self.collection.find()
+        for d in doc:
+            if d['name'] ==  item['name']:
+                # print "************ Diplicate **************"
+                return False
+        
+        # print "************ Not Diplicate **************"
+        return True
