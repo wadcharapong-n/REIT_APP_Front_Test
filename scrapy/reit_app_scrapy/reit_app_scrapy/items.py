@@ -11,4 +11,15 @@ import scrapy
 class ReitAppScrapyItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+    trust_name_th = Field()
+    trust_name_en = Field()
+    ticker = Field()
+    authorized_capital = Field()
+    paid_up_capital = Field()
+    par_value = Field()
+    duration_of_trust = Field()
+    type_of_trust = Field()
+    trustee = Field()
+    address_trustee = Field()
+    type_of_business = Field()
+    auditor = Field()
