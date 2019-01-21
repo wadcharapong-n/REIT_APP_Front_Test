@@ -7,12 +7,33 @@
 import scrapy
 from scrapy.item import Item, Field
 
-class ReitAppScrapyItem(Item):
+
+class ReitAppScrapyItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    name = Field()
-    catagory = Field()
-    identity_id = Field()
-    url = Field()
-    lead = Field()
-   
+    trust_name_th = Field()
+    trust_name_en = Field()
+    ticker = Field()
+    authorized_capital = Field()
+    paid_up_capital = Field()
+    par_value = Field()
+    duration_of_trust = Field()
+    type_of_trust = Field()
+    trustee = Field()
+    address_trustee = Field()
+    type_of_business = Field()
+    auditor = Field()
+
+class ImpactScrapyItem(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    reit_type = Field()
+    investment_policy = Field()
+    investment = Field()
+    assets = Field()
+    listed_unit = Field()
+    ownership = Field()
+    listed_date = Field()
+    par_value = Field()
+    dividend_policy = Field()
+

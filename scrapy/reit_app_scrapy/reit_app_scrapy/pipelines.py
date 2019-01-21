@@ -27,22 +27,41 @@ class ReitAppScrapyPipeline(object):
                 valid = False
                 raise DropItem("Missing {0}!".format(data))
         if valid:
-            if self.checkDuplicate(item):
-                self.collection.insert(dict(item))
-                log.msg("REIT added to MongoDB database!",
-                        level=log.DEBUG, spider=spider)
-            else:
-                log.msg("REIT duplicate in MongoDB database!",
-                        level=log.DEBUG, spider=spider)
+            self.checkDuplicate(item, spider)       
+        else:
+            log.msg("REIT duplicate in MongoDB database!",
+                            level=log.DEBUG, spider=spider)
         return item
 
-    def checkDuplicate(self, item):
-        # print "************** : " + item['name']
-        doc = self.collection.find()
-        for d in doc:
-            if d['name'] ==  item['name']:
-                # print "************ Diplicate **************"
-                return False
+    def checkDuplicate(self, item ,spider):
+
+        # print('Check Collecttion')
+        check_collection = self.collection.find({},{ "_id": 0}).count()
+        if check_collection == 0:
+            # print('Insert Collecttion')
+            self.collection.insert(dict(item))
+            log.msg("REIT added to MongoDB database!",
+                        level=log.DEBUG, spider=spider)
+            return False
+
+
+        # print('Check Contain')
+        item_db = self.collection.find()
+        for data in item_db:
+            for key in data:
+                if key!='_id':
+                    if data[key] != item[key]:
+                        myquery = { key: data[key] }
+                        newvalues = { "$set": { key: item[key] } }
+                        self.collection.update_one(myquery, newvalues)
+                        # print('Update Collection')
+       
+        log.msg("REIT updated to MongoDB database!",
+                        level=log.DEBUG, spider=spider)
+
+        return False
         
-        # print "************ Not Diplicate **************"
-        return True
+        
+
+        
+
