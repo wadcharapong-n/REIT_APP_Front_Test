@@ -7,7 +7,6 @@
 import scrapy
 from scrapy.item import Item, Field
 
-
 class ReitAppScrapyItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
@@ -36,4 +35,16 @@ class ImpactScrapyItem(scrapy.Item):
     listed_date = Field()
     par_value = Field()
     dividend_policy = Field()
+class ReitLhscAppScrapyItem(scrapy.Item):
+    trust_name_th = Field()
+    establishment_date = Field()
+    registration_date = Field()
+    reit_manager = Field()
+    trust_tee = Field()
+    property_manager = Field()
+    investment_amount = Field()
+    investment_unit_amount = Field()
+    loan_amount = Field()
+    per_original_owner = Field()
+    per_general_public = Field()
 
