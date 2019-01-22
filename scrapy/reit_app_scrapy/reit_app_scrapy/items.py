@@ -23,7 +23,7 @@ class ReitAppScrapyItem(scrapy.Item):
     type_of_business = Field()
     auditor = Field()
 
-class ReitLhscAppScrapyItem(Item):
+class ReitLhscAppScrapyItem(scrapy.Item):
     trust_name_th = Field()
     establishment_date = Field()
     registration_date = Field()
@@ -35,5 +35,4 @@ class ReitLhscAppScrapyItem(Item):
     loan_amount = Field()
     per_original_owner = Field()
     per_general_public = Field()
-
 
