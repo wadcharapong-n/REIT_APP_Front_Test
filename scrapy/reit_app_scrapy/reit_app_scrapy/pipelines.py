@@ -5,11 +5,14 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import pymongo
-
 from scrapy.conf import settings
 from scrapy.exceptions import DropItem
 from scrapy import log
 
+
+from scrapy.conf import settings
+from scrapy.exceptions import DropItem
+from scrapy import log
 
 class ReitAppScrapyPipeline(object):
     def __init__(self):
@@ -59,3 +62,4 @@ class ReitAppScrapyPipeline(object):
                 level=log.DEBUG, spider=spider)
 
         return False
+
