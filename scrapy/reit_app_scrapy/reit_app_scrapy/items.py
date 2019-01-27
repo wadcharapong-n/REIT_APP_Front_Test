@@ -26,6 +26,7 @@ class ReitAppScrapyItem(scrapy.Item):
 class ImpactScrapyItem(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
+    trust_name_th = Field()
     reit_type = Field()
     investment_policy = Field()
     investment = Field()
@@ -35,6 +36,7 @@ class ImpactScrapyItem(scrapy.Item):
     listed_date = Field()
     par_value = Field()
     dividend_policy = Field()
+
 class ReitLhscAppScrapyItem(scrapy.Item):
     trust_name_th = Field()
     establishment_date = Field()

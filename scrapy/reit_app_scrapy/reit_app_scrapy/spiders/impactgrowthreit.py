@@ -12,20 +12,21 @@ class ImpactgrowthreitSpider(scrapy.Spider):
     def parse(self, response):
 
         # information = []
-   
-        find_strong = response.css('strong::text').extract()
+        # find_strong = response.css('strong::text').extract()
+
         find_td = response.css('tr td::text').extract()
+        find_trust_name = response.css('p span strong span::text').extract()
         item  = ImpactScrapyItem()
-    
-        item['reit_type'] = find_td[22].replace("\xa0","")
-        item['investment_policy'] = find_td[23].replace("\xa0","")
-        item['investment'] = find_td[24].replace("\xa0","")
-        item['assets'] = find_td[25].replace("\xa0","")
-        item['listed_unit'] = find_td[26].replace("\xa0","")
-        item['ownership'] = find_td[27].replace("\xa0","")
-        item['listed_date'] = find_td[28].replace("\xa0","")
-        item['par_value'] = find_td[29].replace("\xa0","")
-        item['dividend_policy'] = find_td[30].replace("\xa0","")
+      
+        item['trust_name_th'] = find_trust_name[0].replace(" – FACT SHEET","")
+        item['reit_type'] = find_td[22]
+        item['investment_policy'] = find_td[23]
+        item['investment'] = find_td[24]
+        item['listed_unit'] = find_td[26]
+        item['ownership'] = find_td[27]
+        item['listed_date'] = find_td[28]
+        item['par_value'] = find_td[29]
+        item['dividend_policy'] = find_td[30]
 
         yield item 
 
