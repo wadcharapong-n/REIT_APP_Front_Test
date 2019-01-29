@@ -14,15 +14,9 @@ class AmataSpider(scrapy.Spider):
         item['trust_name_th'] = self.getDataByIndex(response,'1')
         item['trust_name_en'] = self.getDataByIndex(response,'2')
         item['ticker'] = self.getDataByIndex(response,'3')
-        item['authorized_capital'] = self.getDataByIndex(response,'4')
-        item['paid_up_capital'] = self.getDataByIndex(response,'5')
-        item['par_value'] = self.getDataByIndex(response,'6')
-        item['duration_of_trust'] = self.getDataByIndex(response,'7')
-        item['type_of_trust'] = self.getDataByIndex(response,'8')
+        item['investment_amount'] = self.getDataByIndex(response,'5')
         item['trustee'] = self.getDataByIndex(response,'9')
-        item['address_trustee'] = self.getDataByIndex(response,'10')
-        item['type_of_business'] = self.getDataByIndex(response,'11')
-        item['auditor'] = self.getDataByIndex(response,'12')
+        item['address'] = self.getDataByIndex(response,'10')
         yield item  
 
     def getDataByIndex(self,response,valueIndex):
