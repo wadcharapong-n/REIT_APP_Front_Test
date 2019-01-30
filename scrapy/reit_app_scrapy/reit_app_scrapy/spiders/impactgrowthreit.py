@@ -1,6 +1,6 @@
 import scrapy
 import json
-from reit_app_scrapy.items import ImpactScrapyItem
+from reit_app_scrapy.items import ReitAppScrapyItem
 
 
 class ImpactgrowthreitSpider(scrapy.Spider):
@@ -11,48 +11,35 @@ class ImpactgrowthreitSpider(scrapy.Spider):
 
     def parse(self, response):
 
-        # information = []
-        # find_strong = response.css('strong::text').extract()
-
         find_td = response.css('tr td::text').extract()
         find_trust_name = response.css('p span strong span::text').extract()
-        item  = ImpactScrapyItem()
+        item  = ReitAppScrapyItem()
       
-        item['trust_name_th'] = find_trust_name[0].replace(" – FACT SHEET","")
-        item['reit_type'] = find_td[22]
-        item['investment_policy'] = find_td[23]
-        item['investment'] = find_td[24]
-        item['listed_unit'] = find_td[26]
-        item['ownership'] = find_td[27]
-        item['listed_date'] = find_td[28]
-        item['par_value'] = find_td[29]
-        item['dividend_policy'] = find_td[30]
+        # item['trust_name_th'] = find_trust_name[0].replace(" – FACT SHEET","")
+        # item['reit_type'] = find_td[22]
+        # item['investment_policy'] = find_td[23]
+        # item['investment'] = find_td[24]
+        # item['listed_unit'] = find_td[26]
+        # item['ownership'] = find_td[27]
+        # item['listed_date'] = find_td[28]
+        # item['par_value'] = find_td[29]
+        # item['dividend_policy'] = find_td[30]
 
+
+        item['trust_name_th'] = find_trust_name[0].replace(" – FACT SHEET","")
+        item['trust_name_en'] = ''
+        item['ticker'] = 'IMPACT'
+        item['trustee'] = ''
+        item['address'] = ''
+        item['investment_amount'] = find_td[23]
+        item['establishment_date'] = ''
+        item['registration_date'] = ''
+        item['reit_manager'] = ''
+                    
         yield item 
 
 
-        # information.append({ "title" : find_strong[0].replace("\xa0","") , "content" : find_td[22].replace("\xa0","") })
-        # information.append({ "title" : find_strong[1].replace("\xa0","") , "content" : find_td[23].replace("\xa0","") })
-        # information.append({ "title" : find_strong[2].replace("\xa0","") , "content" : find_td[24].replace("\xa0","") })
-        # information.append({ "title" : find_strong[3].replace("\xa0","") , "content" : find_td[25].replace("\xa0","") })
-        # information.append({ "title" : find_strong[4].replace("\xa0","") , "content" : find_td[26].replace("\xa0","") })
-        # information.append({ "title" : find_strong[5].replace("\xa0","") , "content" : find_td[27].replace("\xa0","") })
-        # information.append({ "title" : find_strong[6].replace("\xa0","") , "content" : find_td[28].replace("\xa0","") })
-        # information.append({ "title" : find_strong[7].replace("\xa0","") , "content" : find_td[29].replace("\xa0","") })
-        # information.append({ "title" : find_strong[8].replace("\xa0","") , "content" : find_td[30].replace("\xa0","") })
+        
        
-        # information.append({ "title" : find_td[33].replace("\xa0","") , "content" : find_td[34].replace("\xa0","") })
-        # information.append({ "title" : find_td[35].replace("\xa0","") , "content" : find_td[36].replace("\xa0","") })
-        # information.append({ "title" : find_td[37].replace("\xa0","") , "content" : find_td[38].replace("\xa0","") })
-        # information.append({ "title" : find_td[39].replace("\xa0","") , "content" : find_td[40].replace("\xa0","") })
-        # information.append({ "title" : find_td[41].replace("\xa0","") , "content" : find_td[42].replace("\xa0","") })
-
-        # for result in information:
-        #      yield {
-        #         'title': result['title'],
-        #         'content': result['content'],
-        #     }
 
     
-
-            
