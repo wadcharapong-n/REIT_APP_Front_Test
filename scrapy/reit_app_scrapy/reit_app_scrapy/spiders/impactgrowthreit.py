@@ -15,7 +15,7 @@ class ImpactgrowthreitSpider(scrapy.Spider):
         find_trust_name = response.css('p span strong span::text').extract()
         item  = ReitAppScrapyItem()
       
-        # item['trust_name_th'] = find_trust_name[0].replace(" – FACT SHEET","")
+        # item['trust_name_th'] = find_trust_name[0]
         # item['reit_type'] = find_td[22]
         # item['investment_policy'] = find_td[23]
         # item['investment'] = find_td[24]
@@ -26,8 +26,9 @@ class ImpactgrowthreitSpider(scrapy.Spider):
         # item['dividend_policy'] = find_td[30]
 
 
-        item['trust_name_th'] = find_trust_name[0].replace(" – FACT SHEET","")
-        item['trust_name_en'] = ''
+        item['trust_name_th'] = find_trust_name[0].encode(
+            'utf8').replace('\xe2\x80\x93 FACT SHEET', "").decode(
+            'utf8')
         item['ticker'] = 'IMPACT'
         item['trustee'] = ''
         item['address'] = ''
